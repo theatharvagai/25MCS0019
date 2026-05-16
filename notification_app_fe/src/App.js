@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import AllPage from './pages/AllPage'
+import PriorityPage from './pages/PriorityPage'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   return(
+
+      <BrowserRouter>
+
+         <div style= {{background:"#333", padding:"10px"}}>
+
+            <Link to="/" style ={{color:"white", marginRight:"15px"}}>All Notifications
+            </Link>
+
+            <Link to="/priority" style={{color:"white"}}>Priority
+            </Link>
+
+         </div>
+         <div style={{padding:"15px"}}>
+
+            <Routes>
+               <Route path= "/" element={<AllPage/>}/>
+
+               <Route path= "/priority" element={<PriorityPage/>}/>
+            </Routes>
+
+         </div>
+
+      </BrowserRouter>
+
+   )
+
+
 }
 
-export default App;
+export default App
