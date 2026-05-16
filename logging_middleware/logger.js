@@ -1,0 +1,42 @@
+const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJnYWkuYXRoYXJ2YXJhamVuZHJhMjAyNUB2aXRzdHVkZW50LmFjLmluIiwiZXhwIjoxNzc4OTMxNTM4LCJpYXQiOjE3Nzg5MzA2MzgsImlzcyI6IkFmZm9yZCBNZWRpY2FsIFRlY2hub2xvZ2llcyBQcml2YXRlIExpbWl0ZWQiLCJqdGkiOiJhOWQ0NGY3OS1hMjFhLTRjNTUtYWQzMC0wOTdkY2JhMTBjNzciLCJsb2NhbGUiOiJlbi1JTiIsIm5hbWUiOiJhdGhhcnZhIGdhaSIsInN1YiI6IjlmMjEyZmFiLTJhY2YtNDAzZi04ZDRmLTE4OGE5YTBlMWJlNCJ9LCJlbWFpbCI6ImdhaS5hdGhhcnZhcmFqZW5kcmEyMDI1QHZpdHN0dWRlbnQuYWMuaW4iLCJuYW1lIjoiYXRoYXJ2YSBnYWkiLCJyb2xsTm8iOiIyNW1jczAwMTkiLCJhY2Nlc3NDb2RlIjoiU2ZGdVdnIiwiY2xpZW50SUQiOiI5ZjIxMmZhYi0yYWNmLTQwM2YtOGQ0Zi0xODhhOWEwZTFiZTQiLCJjbGllbnRTZWNyZXQiOiJGZVVFWWRZZXhLa0t1QWNmIn0.dwCZeFTByGBPk99qKJ80VFouPptyt5ZM6OQ16Bn0Mmc"
+
+
+async function Log(stack, level, pkg, msg){
+
+
+    try{
+
+        let r =  await fetch("http://4.224.186.213/evaluation-service/logs", {
+            
+            method:"POST",
+            headers: {
+
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${TOKEN}`
+
+
+            },
+
+            body: JSON.stringify( {
+
+              stack:stack,
+              level:level,
+              package:pkg,
+              message:msg
+
+            })
+
+        }
+    )
+        let d = await r.json()
+        return d
+
+    } catch(e){
+        console.error("log err", e.message)
+
+    }
+}
+
+
+
+module.exports = {Log}
